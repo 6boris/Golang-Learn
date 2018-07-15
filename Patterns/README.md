@@ -12,31 +12,81 @@
 > 缺点：如果singleton创建初始化比较复杂耗时时，加载时间会延长。
 #### 实现
 ```go
-type singleton struct{}
-var ins *singleton = &singleton{}
-func GetIns() *singleton{
-	return ins
+type SingletonLazy struct{}
+
+var insSingletonLazy *SingletonLazy
+
+// 获取懒汉模式对象
+func GetInstanceSingletonLazy() *SingletonLazy {
+	if insSingletonLazy == nil {
+		insSingletonLazy = &SingletonLazy{}
+	}
+	return insSingletonLazy
 }
 ```
 #### 测试
+```go
+t.Run("TesSingletonLazy...", func(t *testing.T) {
+    ins1 := GetInstanceSingletonLazy()
+    ins2 := GetInstanceSingletonLazy()
+    if ins1 != ins2 {
+        t.Fatal("instance is not equal")
+    }
+})
+```
 
-### 1.2 Static block initialization()
-### 1.3 Lazy Initialization(懒汉初始化)
+### 1.2 Lazy Initialization(懒汉初始化)
 >实现Singleton模式的延迟初始化方法在全局访问方法中创建实例。以下是使用此方法创建Singleton类的示例代码。
 
 >缺点：非线程安全。当正在创建时，有线程来访问此时ins = nil就会再创建，单例类就会有多个实例了。
 #### 实现
 ```go
-type singleton struct{}
-var ins *singleton = &singleton{}
-func GetIns() *singleton{
-    return ins
+type SingletonEager struct{}
+
+var insSingletonEager *SingletonEager = &SingletonEager{}
+
+// 获取饿汉模式对象
+func GetInstanceSingletonEager() *SingletonEager {
+	return insSingletonEager
 }
 ```
 #### 测试
+```go
+t.Run("SingletonEager...", func(t *testing.T) {
+    ins1 := GetInstanceSingletonEager()
+    ins2 := GetInstanceSingletonEager()
+    if ins1 != ins2 {
+        t.Fatal("instance is not equal")
+    }
+})
+```
 
-### 1.4 Bill Pugh Singleton Implementation()
-### 1.5 Using Reflection to destroy Singleton Pattern()
-### 1.6 Enum Singleton()
-### 1.7 Serialization and Singleton()
+### 1.3 Lazy And Lock Initialization(懒汉加锁初始化)
+> 缺点：虽然解决并发的问题，但每次加锁是要付出代价的
 
+#### 实现
+```go
+type SingletonLazyLock struct{}
+
+var insSingletonLazyLock *SingletonLazyLock
+var muSingletonLazyLock sync.Mutex
+
+func GetInstanceSingletonLazyLock() *SingletonLazyLock {
+	muSingletonLazyLock.Lock()
+	defer muSingletonLazyLock.Unlock()
+	if insSingletonLazyLock == nil {
+		insSingletonLazyLock = &SingletonLazyLock{}
+	}
+	return insSingletonLazyLock
+}
+```
+#### 测试
+```go
+t.Run("SingletonEager...", func(t *testing.T) {
+    ins1 := GetInstanceSingletonLazyLock()
+    ins2 := GetInstanceSingletonLazyLock()
+    if ins1 != ins2 {
+        t.Fatal("instance is not equal")
+    }
+})
+```
