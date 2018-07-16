@@ -86,6 +86,7 @@ t.Run("SingletonEager...", func(t *testing.T) {
     ins1 := GetInstanceSingletonLazyLock()
     ins2 := GetInstanceSingletonLazyLock()
     if ins1 != ins2 {
+    	
         t.Fatal("instance is not equal")
     }
 })
