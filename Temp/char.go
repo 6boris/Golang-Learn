@@ -1,17 +1,39 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"encoding/json"
+)
 
-func HasPrefix(s, prefix string) bool {
-	return len(s) >= len(prefix) && s[:len(prefix)] == prefix
+type MSResult struct {
+	Code 	uint		`json:"code"`
+	//Data 	struct{}	`json:"data"`
+	Data 	string		`json:"data"`
+	Message	string		`json:"message"`
 }
-func HasSuffix(s, suffix string) bool {
-	return len(s) >= len(suffix) && s[len(s)-len(suffix):] == suffix
+
+type User struct {
+	Id		int8
+	Name	string
+}
+func (self *User) ToJson() string {
+	res,_ := json.Marshal(self)
+	return string(res)
+}
+
+func (self *MSResult) ToJson() string {
+	res,_ := json.Marshal(self)
+	return string(res)
 }
 
 func main() {
-	str1 := "asadadsdadsd"
-	str2 := "asd"
+	m := new(MSResult)
+	m.Code = 200
+	//m.Data = new()
+	m.Message = "注册成功"
+	u := User{1,"KYLE"}
+	m.Data = u.ToJson()
 
-	fmt.Println(HasPrefix(str1, str2))
+	fmt.Println(u.ToJson())
+	fmt.Println(m.ToJson())
 }
