@@ -5,11 +5,6 @@ import (
 	"testing"
 )
 
-type Array struct {
-	Got  []int `json:got`
-	Want []int `json:want`
-}
-
 func TestBubbleSort(t *testing.T) {
 	t.Run("BubbleSort Sort  Test:", func(t *testing.T) {
 		arr := []int{1, 3, 2, 4, 5}
