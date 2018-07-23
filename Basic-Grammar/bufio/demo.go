@@ -1,16 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"strings"
 )
 
 func main() {
-	input := "foo   bar      baz"
-	scanner := bufio.NewScanner(strings.NewReader(input))
-	scanner.Split(bufio.ScanWords)
-	for scanner.Scan() {
-		fmt.Println(scanner.Text())
-	}
+	r := strings.NewReplacer("<", "&lt;", ">", "&gt;")
+	fmt.Println(r.Replace("This is <b>HTML</b>!"))
 }

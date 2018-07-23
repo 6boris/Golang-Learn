@@ -1,57 +1,30 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
-	"os"
-	"strings"
+	"sort"
 )
 
-func BubbleSort(arr []int) []int {
-	tmp := 0
-	for i := 0; i < len(arr); i++ {
-		for j := 0; j < len(arr)-i-1; j++ {
-			if arr[j] > arr[j+1] {
-				tmp = arr[j]
-				arr[j] = arr[j+1]
-				arr[j+1] = tmp
-			}
-		}
-	}
-	return arr
-}
-
-func ReadLine(fileName string, handler func(string)) error {
-	f, err := os.Open(fileName)
-	if err != nil {
-		return err
-	}
-	buf := bufio.NewReader(f)
-	for {
-		line, err := buf.ReadString('\n')
-		line = strings.TrimSpace(line)
-		handler(line)
-		if err != nil {
-			if err == io.EOF {
-				return nil
-			}
-			return err
-		}
-	}
-	return nil
-}
-
-func Print(line string) {
-	fmt.Println(line)
+func GuessingGame() {
+	var s string
+	fmt.Printf("Pick an integer from 0 to 100.\n")
+	answer := sort.Search(100, func(i int) bool {
+		fmt.Printf("Is your number <= %d? ", i)
+		fmt.Scanf("%s", &s)
+		return s != "" && s[0] == 'y'
+	})
+	fmt.Printf("Your number is %d.\n", answer)
 }
 
 func main() {
-	ReadLine("./Sort/data.txt", Print)
+	x := 11
+	s := []int{3, 6, 8, 11, 45, 2} //注意已经升序排序
+	pos := sort.Search(len(s), func(i int) bool { return s[i] >= x })
+	if pos < len(s) && s[pos] == x {
+		fmt.Println(x, "在s中的位置为：", pos)
+	} else {
+		fmt.Println("s不包含元素", x)
+	}
 
-	arr := new(Array)
-	arr.Got = []int{1, 3, 2, 4, 5}
-	arr.Want = []int{1, 2, 3, 4, 5}
-	fmt.Println(arr.Got)
-	fmt.Println(arr.Want)
+	GuessingGame()
 }

@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 	"strings"
+	"unicode"
 )
 
 func main() {
@@ -13,7 +13,7 @@ func main() {
 	fmt.Println(strings.ContainsAny("in failure", "s g"))
 	fmt.Println(strings.ContainsAny("foo", ""))
 	fmt.Println(strings.ContainsAny("", ""))
-	fmt.Println(reflect.TypeOf(1 > 2))
-	fmt.Println(strings.Count("asdasda", "as"))
-	fmt.Println(strings.Count("fivevev", "vev"))
+
+	fmt.Printf("Fields are: %q\n", strings.Fields("  foo bar  baz   "))
+	fmt.Println(strings.FieldsFunc("  foo bar  baz   \n", unicode.IsSpace))
 }
