@@ -1,4 +1,4 @@
-package main
+package Solution
 
 import (
 	"errors"
@@ -46,3 +46,48 @@ func (stack *Stack) Pop() (interface{}, error) {
 	*stack = theStack[:len(theStack)-1]
 	return value, nil
 }
+
+type MinStack struct {
+	data Stack
+	min  Stack
+}
+
+/** initialize your data structure here. */
+func Constructor() MinStack {
+	return MinStack{}
+}
+
+func (this *MinStack) Push(x interface{}) {
+	this.data.Push(x)
+
+	if n, _ := this.min.Top(); this.min.IsEmpty() || n.(int) >= x.(int) {
+		this.min.Push(x)
+	}
+}
+
+func (this *MinStack) Pop() {
+	x, _ := this.data.Pop()
+
+	if n, _ := this.min.Top(); n == x {
+		this.min.Pop()
+	}
+}
+
+func (this *MinStack) Top() interface{} {
+	res, _ := this.data.Top()
+	return res
+}
+
+func (this *MinStack) GetMin() interface{} {
+	res, _ := this.min.Top()
+	return res
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * obj := Constructor();
+ * obj.Push(x);
+ * obj.Pop();
+ * param_3 := obj.Top();
+ * param_4 := obj.GetMin();
+ */
