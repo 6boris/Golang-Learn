@@ -23,6 +23,5 @@ Explanation: You can't get a non-decreasing array by modify at most one element.
 
 ## Solution
 ### Approach1
-在遍历数组时用 Stack 把数组中的数存起来，如果当前遍历的数比栈顶元素来的大，说明栈顶元素的下一个比它大的数就是当前元素。
-
+给定一个数组，和一个整数k，判断该数组中是否存在不同下标的 i 和 j 两个元素，使得 nums[i] = nums[j]，且 i 和 j 的差不超过k
 ### Approach2

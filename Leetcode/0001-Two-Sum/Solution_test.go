@@ -23,7 +23,7 @@ func IsEqualForSlice(a, b []int) bool {
 	//	https://go101.org/article/bounds-check-elimination.html
 	b = b[:len(a)]
 
-	//	玄幻检测每个元素是否相等
+	//	循环检测每个元素是否相等
 	for i, v := range a {
 		if v != a[i] {
 			return false
