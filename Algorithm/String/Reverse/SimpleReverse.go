@@ -16,9 +16,7 @@ func main() {
 	SimpleReverseInt(s[2:])
 	SimpleReverseInt(s)
 	fmt.Println(s)
-
 	Reverse("a")
-
 }
 
 func Reverse(str string) bool {

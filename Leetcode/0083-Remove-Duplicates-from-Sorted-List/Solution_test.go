@@ -10,9 +10,7 @@ func TestSolution(t *testing.T) {
 			t.Errorf("GOT:", got, "WANT:", want)
 		}
 	})
-	t.Run("asd", func(t *testing.T) {
 
-	})
 	t.Run("Test-2", func(t *testing.T) {
 		got := Solution()
 		want := true
