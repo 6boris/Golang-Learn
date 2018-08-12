@@ -12,7 +12,4 @@ func TestSolution(t *testing.T) {
 		l2 := []int{1, 3, 4}
 		fmt.Println(l1, l2)
 	})
-	t.Run("Test_Demo", func(t *testing.T) {
-		demo()
-	})
 }
