@@ -8,7 +8,7 @@ import (
 
 const MIN_NUM = 1
 const MAX_NUM = 100
-const ARRAY_NUM = 1000
+const ARRAY_NUM = 10
 
 type Data struct {
 	Input  []int
