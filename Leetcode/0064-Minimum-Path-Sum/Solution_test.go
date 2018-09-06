@@ -4,16 +4,13 @@ import "testing"
 
 func TestSolution(t *testing.T) {
 	t.Run("Test-1", func(t *testing.T) {
-		got := climbStairs(2)
-		want := 2
-		if got != want {
-			t.Errorf("GOT:", got, "WANT:", want)
+		data := [][]int{
+			{1, 3, 1},
+			{1, 5, 1},
+			{4, 2, 1},
 		}
-	})
-
-	t.Run("Test-2", func(t *testing.T) {
-		got := climbStairs(6)
-		want := 1
+		got := minPathSum(data)
+		want := 7
 		if got != want {
 			t.Errorf("GOT:", got, "WANT:", want)
 		}
