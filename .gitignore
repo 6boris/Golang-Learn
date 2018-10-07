@@ -1,5 +1,5 @@
 # Binaries for programs and plugins
-.exe
+*.exe
 .exe~
 .dll
 .so
@@ -13,5 +13,4 @@
 .vs/
 .idea/
 /vendor/
-*Debug/.exe
 
