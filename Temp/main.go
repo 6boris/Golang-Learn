@@ -2,17 +2,30 @@ package main
 
 import (
 	"fmt"
-	"github.com/kylesliu/gonp/Stack"
+	"strconv"
 )
 
 func main() {
-	s := Stack.GetMinStack()
-	fmt.Println(s.Top())
-	fmt.Println(s.IsEmpty())
-	s.Push(1)
-	s.Push(2)
-	s.Push(3)
-	fmt.Println(s.Top())
-	fmt.Println(s.Pop())
-	fmt.Println(s.Top())
+
+	l := 0
+	r := 0
+	count := 0
+	fmt.Scanf("%d %d", &l, &r)
+
+	for i := l; i <= r; i++ {
+		if IsEqual(i) {
+			count++
+		}
+	}
+	fmt.Println(count)
+
+}
+
+func IsEqual(x int) bool {
+	str := strconv.Itoa(x)
+	if str[0] == str[len(str)-1] {
+		return true
+	}
+
+	return false
 }

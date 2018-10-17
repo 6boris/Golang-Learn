@@ -9,23 +9,23 @@ import (
 )
 
 type Article struct {
-	ID    int    `gorm:"primary_key" json:"id"`
-	TagID int    `json:"tag_id"`
-	Title string `json:"title"`
+	ID      int    `gorm:"primary_key" json:"id"`
+	GroupId int    `gorm:"column:g_id" json:"g_id"`
+	Title   string `json:"title"`
 
-	Tag Tag `gorm:"ForeignKey:TagID" json:"tag"`
+	Group Group `gorm:"ForeignKey:GroupId" json:"group"`
 }
 
-type Tag struct {
+type Group struct {
 	ID   uint   `gorm:"primary_key" json:"id"`
 	Name string `json:"name"`
 }
 
 func (Article) TableName() string {
-	return "test_article"
+	return "blog_article"
 }
-func (Tag) TableName() string {
-	return "test_tag"
+func (Group) TableName() string {
+	return "blog_article_group"
 }
 
 func main() {
@@ -42,9 +42,9 @@ func main() {
 	r.GET("/", func(c *gin.Context) {
 		article := []Article{}
 		//db.Find(&article)
-		db.Preload("Tag").Find(&article)
-		//for i:=0; i<len(article) ; i++  {
-		//	db.Model(&article[i]).Related(&article[i].Tag)
+		db.Preload("Group").Find(&article)
+		//for i := 0; i < len(article); i++ {
+		//	db.Model(&article[i]).Related(&article[i].Group)
 		//}
 
 		c.JSON(http.StatusOK, gin.H{
@@ -52,5 +52,5 @@ func main() {
 		})
 	})
 
-	r.Run("127.0.0.1:7000") // listen and serve on 0.0.0.0:8080
+	r.Run("127.0.0.1:8000") // listen and serve on 0.0.0.0:8080
 }
