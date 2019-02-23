@@ -13,4 +13,5 @@
 .vs/
 .idea/
 /vendor/
+*.iml
 
