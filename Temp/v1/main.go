@@ -3,21 +3,26 @@ package main
 import "fmt"
 
 func main() {
+	var n, sx, sy, ex, ey int
+	_, err := fmt.Scanf("%d %d %d %d %d", &n, &sx, &sy, &ex, &ey)
+	if err != nil {
+		fmt.Println(err)
+	}
+	ans := max(abs(sx-ex), abs(sy-ey))
 
-	checkThis(7, 7)
+	//fmt.Println(n, sx, sy, ex, ey)
+	fmt.Println(ans)
 
 }
-
-func checkThis(r, s int) int {
-	var u int
-	fmt.Println(r, s)
-	if r <= 0 || s <= 0 {
-		u = r + s
-	} else if r > s {
-		u = checkThis(r-5, s-4) + s
-	} else {
-		u = checkThis(r-4, s-5) + r
+func max(x, y int) int {
+	if x > y {
+		return x
 	}
-	fmt.Println(u)
-	return u
+	return y
+}
+func abs(x int) int {
+	if x > 0 {
+		return x
+	}
+	return -x
 }

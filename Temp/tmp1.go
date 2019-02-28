@@ -1,8 +1,7 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import "strings"
 
-func main()  {
-	app := gin.New()
-
+func main() {
+	strings.Split()
 }
