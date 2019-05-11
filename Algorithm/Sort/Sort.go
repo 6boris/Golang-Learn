@@ -46,7 +46,6 @@ func InsertSort(arr []int) []int {
 // 选择排序(Select Sort)
 func SelectSort(arr []int) []int {
 	var min = 0
-	var tmp = 0
 
 	for i := 0; i < len(arr); i++ {
 		min = i
@@ -55,10 +54,7 @@ func SelectSort(arr []int) []int {
 				min = j
 			}
 		}
-
-		tmp = arr[i]
-		arr[i] = arr[min]
-		arr[min] = tmp
+		arr[i], arr[min] = arr[min], arr[i]
 	}
 	return arr
 }

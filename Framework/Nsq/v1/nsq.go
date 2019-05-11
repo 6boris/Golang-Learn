@@ -28,7 +28,7 @@ func testNSQ() {
 		}
 
 		consumer.AddHandler(&NSQHandler{})
-		err = consumer.ConnectToNSQD("10.100.156.207:4150")
+		err = consumer.ConnectToNSQD("120.79.134.74:4150")
 		if nil != err {
 			log.Println(err)
 			return
@@ -38,4 +38,8 @@ func testNSQ() {
 	}()
 
 	waiter.Wait()
+}
+
+func main() {
+	testNSQ()
 }
