@@ -8,7 +8,7 @@ func main() {
 	s := []int{1, 2, 3}
 	ss := s[1:]
 	ss = append(ss, 4)
-	fmt.Println(ss)
+
 	for _, v := range ss {
 		v += 10
 	}

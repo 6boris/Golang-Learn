@@ -1,31 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+	"net/http"
+)
 
 func main() {
-	pase_student()
-}
-
-type student struct {
-	Name string
-	Age  int
-}
-
-func pase_student() {
-	m := make(map[string]*student)
-	stus := []student{
-		{Name: "zhou", Age: 24},
-		{Name: "li", Age: 23},
-		{Name: "wang", Age: 22},
+	resp, err := http.Get("https://api.ipify.org?format=jsonasdas")
+	defer resp.Body.Close() //ok, most of the time :-)
+	if err != nil {
+		fmt.Println(err)
+		return
 	}
-	for _, stu := range stus {
-		m[stu.Name] = &stu
-		fmt.Printf("%p ", &stu)
-		//fmt.Printf("%v ",&stu.Age)
-		//fmt.Printf("%v",&stu.Name)
-		//fmt.Println(stu)
-	}
-	v, ok := m["li"]
 
-	fmt.Println(ok, v.Age)
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(body))
 }
