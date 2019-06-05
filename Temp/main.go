@@ -1,23 +1,46 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 )
 
-func main() {
-	resp, err := http.Get("https://api.ipify.org?format=jsonasdas")
-	defer resp.Body.Close() //ok, most of the time :-)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+type PayInterface interface {
+	Do1()
+	Do2()
+	Do3()
+}
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Println(err)
-		return
+type PayChannel1 struct {
+}
+
+func (p *PayChannel1) Do1() {
+	fmt.Println("PayChannel1:Do1")
+}
+
+func (p *PayChannel1) Do2() {
+
+}
+
+func (p *PayChannel1) Do3() {
+
+}
+
+func GetPayInstance(s string) (PayInterface, error) {
+	switch s {
+	case "1":
+		return new(PayChannel1), nil
+	default:
+		return nil, errors.New("s is err")
 	}
-	fmt.Println(string(body))
+}
+
+func main() {
+	ch, err := GetPayInstance("11")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	if ch != nil {
+		ch.Do1()
+	}
 }

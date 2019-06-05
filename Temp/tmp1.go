@@ -2,34 +2,21 @@ package main
 
 import (
 	"fmt"
-	"sync"
-	"time"
 )
 
 func main() {
-	jobs := make(chan int)
-	var wg sync.WaitGroup
+	var s []string
+	fmt.Scanf("%s", &s)
 
-	//	定时直接关闭channel
-	go func() {
-		time.Sleep(time.Second * 3)
-		close(jobs)
-	}()
-
-	//	无脑向channel发送数据【向已经关闭的channel发送数据会直接panic】
-	go func() {
-		for i := 0; ; i++ {
-			jobs <- i
-			fmt.Println("produce:", i)
+	k := 0
+	for i := 0; i < len(str); i++ {
+		s[k] = s[i]
+		if k >= 3 && s[k-3] == s[k-2] && s[k-2] == s[k-1] {
+			k--
 		}
-	}()
-	//	在channel中读取数据
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		for i := range jobs {
-			fmt.Println("consume:", i)
+		if k >= 4 && s[k-4] == s[k-3] && s[k-2] == s[k-1] {
+			k--
 		}
-	}()
-	wg.Wait()
+	}
+	fmt.Println(s[:k])
 }

@@ -15,9 +15,9 @@ func AsyncService() chan string {
 	retCh := make(chan string, 1)
 	//retCh := make(chan string, 1)
 	go func() {
-		ret := service()
+		//ret := service()
 		fmt.Println("returned result.")
-		retCh <- ret
+		retCh <- service()
 		fmt.Println("service exited.")
 	}()
 	return retCh
@@ -27,7 +27,7 @@ func TestSelect(t *testing.T) {
 	select {
 	case ret := <-AsyncService():
 		t.Log(ret)
-	case <-time.After(time.Millisecond * 100):
+	case <-time.After(time.Millisecond * 1000):
 		t.Error("time out")
 	}
 }
