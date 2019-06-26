@@ -16,7 +16,7 @@ func main() {
 		go func(i int) {
 			defer wg.Done()
 			decodeConfig := nsq.NewConfig()
-			c, err := nsq.NewConsumer("test", "test-channel", decodeConfig)
+			c, err := nsq.NewConsumer("test1", "test-channel1", decodeConfig)
 			if err != nil {
 				log.Panic("Could not create consumer")
 			}
@@ -25,7 +25,7 @@ func main() {
 				return nil
 			}))
 
-			err = c.ConnectToNSQD("nsq.kyle.link:4152")
+			err = c.ConnectToNSQD("nsq.kyle.link:4150")
 			if err != nil {
 				log.Panicln("connect error:", err.Error())
 			}
